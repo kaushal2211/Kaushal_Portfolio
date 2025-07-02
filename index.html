@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kaushal Patel | QA Engineer Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0d0d0d 100%);
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 1s; }
+    .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 2s; }
+    .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 0.5s; }
+    .particle:nth-child(5) { width: 4px; height: 4px; left: 60%; animation-delay: 1.5s; }
+    .particle:nth-child(6) { width: 6px; height: 6px; left: 70%; animation-delay: 2.5s; }
+    .particle:nth-child(7) { width: 3px; height: 3px; left: 80%; animation-delay: 3s; }
+    .particle:nth-child(8) { width: 5px; height: 5px; left: 90%; animation-delay: 0.8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header Styles */
+    header {
+      text-align: center;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .profile-circle {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(45deg, #ffffff, #cccccc);
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+      animation: pulse 2s ease-in-out infinite;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      color: #000000;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ffffff, #cccccc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: slideInDown 1s ease-out;
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      color: #cccccc;
+      margin-bottom: 20px;
+      animation: slideInUp 1s ease-out 0.2s both;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      animation: fadeIn 1s ease-out 0.4s both;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Section Styles */
+    .section {
+      margin: 80px 0;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .section.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(255, 255, 255, 0.05);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #ffffff;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 40px;
+      background: linear-gradient(to bottom, #ffffff, #cccccc);
+      border-radius: 2px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 15px;
+      border-left: 4px solid #ffffff;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .skill-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .skill-card:hover {
+      transform: translateX(10px);
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #cccccc;
+    }
+
+    .skill-title {
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    /* Experience Timeline */
+    .experience-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      position: relative;
+      border-left: 4px solid #ffffff;
+      margin-left: 20px;
+    }
+
+    .experience-card::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 30px;
+      width: 20px;
+      height: 20px;
+      background: #ffffff;
+      border-radius: 50%;
+      border: 4px solid #000000;
+    }
+
+    .job-title {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .company-period {
+      color: #cccccc;
+      margin-bottom: 20px;
+    }
+
+    .achievement-list {
+      list-style: none;
+    }
+
+    .achievement-list li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .achievement-list li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #ffffff;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+      border-radius: 50%;
+      transform: translate(50px, -50px);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover::after {
+      transform: translate(30px, -30px) scale(1.5);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+    }
+
+    .project-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    /* Tools Section */
+    .tools-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .tool-tag {
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #1e40af, #3b82f6);
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-tag::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .tool-tag:hover::before {
+      left: 100%;
+    }
+
+    .tool-tag:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Education Card */
+    .education-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      border-left: 4px solid #ffffff;
+    }
+
+    .degree {
+      font-size: 1.3rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .institution {
+      color: #cccccc;
+      margin-bottom: 15px;
+    }
+
+    .academic-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .academic-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Languages */
+    .languages-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .language-item {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      min-width: 120px;
+    }
+
+    .language-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 80px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animations */
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .contact-info { flex-direction: column; align-items: center; }
+      .section { margin: 40px 0; padding: 25px; }
+      .section-title { font-size: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="profile-circle">🧑‍💼</div>
+      <h1>Kaushal Patel</h1>
+      <p class="subtitle">QA Engineer | Manual & Automation Testing | EHR Integration</p>
+      <div class="contact-info">
+        <div class="contact-item">📍 Ahmedabad, Gujarat</div>
+        <div class="contact-item">📧 kaushalp2211@gmail.com</div>
+        <div class="contact-item">📱 +91 8320363751</div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">💼 About Me</h2>
+      <p style="font-size: 1.1rem; line-height: 1.8;">
+        I'm a passionate Junior QA Engineer with experience in manual and automation testing at Aditadv. Tech Pvt. Ltd.
+        I've contributed to high-impact projects, improving product reliability and QA efficiency.
+        With a strong foundation in testing methodologies and tools like Selenium, Cypress, and Postman,
+        I'm driven to ensure software quality and seamless user experience — especially in complex domains like healthcare (EHR systems).
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🧪 Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-title">Testing Types</div>
+          <p>Manual, Automation, Functional, Regression, Non-Functional, Mobile & API Testing</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-title">Test Management</div>
+          <p>Test Planning, Test Case Design, Defect Reporting</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-title">Tools & Tech</div>
+          <p>Selenium, Cypress, Postman, Katalon Studio</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-title">Healthcare Focus</div>
+          <p>EHR Integration, Cron Job Testing, Cloud EHR, Family Reminder Systems</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🏢 Experience</h2>
+      <div class="experience-card">
+        <h3 class="job-title">QA Engineer</h3>
+        <p class="company-period">Aditadv. Tech Pvt. Ltd. | Jan 2024 – Present</p>
+        <ul class="achievement-list">
+          <li>Developed detailed defect reports and collaborated with dev teams to resolve issues.</li>
+          <li>Led manual and automated end-to-end testing across various environments (staging, production).</li>
+          <li>Improved cron job reliability by scripting and analyzing test cases and logs.</li>
+          <li>Played a key role in EHR system integration, ensuring compliance with healthcare standards.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">📂 Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-number">01</div>
+          <h4 class="project-title">Electronic Health Record (EHR) Testing</h4>
+          <ul class="achievement-list">
+            <li>Tested EHR modules like Reminders, Recall Reports, and Family Reminders.</li>
+            <li>Verified synchronization between Last Contacted Date and patient records.</li>
+          </ul>
+        </div>
+        <div class="project-card">
+          <div class="project-number">02</div>
+          <h4 class="project-title">Cron Job Validation</h4>
+          <ul class="achievement-list">
+            <li>Automated testing for cron jobs and ensured accurate schedule execution.</li>
+            <li>Used logs to identify and resolve job failures proactively.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">📚 Education</h2>
+      <div class="education-card">
+        <div class="degree">Bachelor of Engineering (Computer Science & Engineering)</div>
+        <div class="institution">Sal Engineering & Technical Institute | 2020–2024</div>
+        <div class="academic-details">
+          <div class="academic-item">
+            <strong>CGPA</strong><br>7.16
+          </div>
+          <div class="academic-item">
+            <strong>H.S.C. (2020)</strong>
+          </div>
+          <div class="academic-item">
+            <strong>S.S.C. (2018)</strong>
+          </div>
+        </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🛠️ Tools</h2>
+      <div class="tools-container">
+        <div class="tool-tag">Postman</div>
+        <div class="tool-tag">Selenium</div>
+        <div class="tool-tag">Cypress</div>
+        <div class="tool-tag">Katalon</div>
+        <div class="tool-tag">Git</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🌐 Languages</h2>
+      <div class="languages-container">
+        <div class="language-item">
+          <div style="font-size: 2rem; margin-bottom: 10px;">🇮🇳</div>
+          <strong>Gujarati</strong>
+        </div>
+        <div class="language-item">
+          <div style="font-size: 2rem; margin-bottom: 10px;">🇮🇳</div>
+          <strong>Hindi</strong>
+        </div>
+        <div class="language-item">
+          <div style="font-size: 2rem; margin-bottom: 10px;">🇺🇸</div>
+          <strong>English</strong>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 Kaushal Patel. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Add smooth scrolling for any internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add dynamic year to footer
+    document.querySelector('footer p').innerHTML = `© ${new Date().getFullYear()} Kaushal Patel. All rights reserved.`;
+  </script>
+</body>
+</html>
